@@ -13,7 +13,7 @@ const status = {
     // unitHeight - number
     // size - (large / medium / small / xsmall)
     // layout - (portrait / landscape)
-    // slideType - ()
+    // slideType - (cover/description)
     slideType: "cover"
 }
 
@@ -23,10 +23,10 @@ const status = {
 function unitSize() {
     let width = cnxUnit.clientWidth;
     let height = cnxUnit.clientHeight;
-
+    
     status.unitWidth = width; // update status object
     status.unitHeight = height; // update status object
-
+    
     if (width >= 400) {
         unitMain.className = ""
         unitMain.classList.add("landscape");
@@ -43,7 +43,7 @@ function unitSize() {
 // updates status object with size type (large/medium/small/xsmall)
 function updateSizeType() {
     let arr = unitSize();
-
+    
     if (arr[0] >= large) {
         status.size = "large"; 
     } else if(arr[0] >= medium){
@@ -62,27 +62,27 @@ function updateSizeType() {
 function addSizeClassOnPlayer(){
     switch (status.size) {
         case "large":
-            cnxUnit.className = "";
-            cnxUnit.classList.add("large");
-            break;
-
+        cnxUnit.className = "";
+        cnxUnit.classList.add("large");
+        break;
+        
         case "medium":
-            cnxUnit.className = "";
-            cnxUnit.classList.add("medium");
-            break;
-
+        cnxUnit.className = "";
+        cnxUnit.classList.add("medium");
+        break;
+        
         case "small":
-            cnxUnit.className = "";
-            cnxUnit.classList.add("small");
-            break;
-
+        cnxUnit.className = "";
+        cnxUnit.classList.add("small");
+        break;
+        
         case "xsmall":
-            cnxUnit.className = "";
-            cnxUnit.classList.add("xsmall");
-            break;
-    
+        cnxUnit.className = "";
+        cnxUnit.classList.add("xsmall");
+        break;
+        
         default:
-            break;
+        break;
     }
 }addSizeClassOnPlayer();
 
@@ -107,6 +107,109 @@ function bottomSizeforPortrait() {
     }
 }bottomSizeforPortrait();
 
+//-----------animations-------------
+//----------------------------------
+
+
+
+
+//-----------animations-------------
+//----------------------------------
+
+function animationsOnLoad(){
+    let slideType = status.slideType;
+
+    if(slideType == "cover") {
+
+        let title = document.querySelector(".content.cover .title-wrapper");
+        let subtitle = document.querySelector(".content.cover .subtitle-wrapper");
+        let footer = document.querySelector(".unit-bottom[cover] footer");
+        
+        subtitle.classList.remove("bounceUp");
+        title.classList.remove("bounceUp");
+        
+        title.classList.add("bounceUp");
+        setTimeout(function(){ 
+            subtitle.classList.add("bounceUp");
+        }, 400);
+        setTimeout(function(){ 
+            footer.classList.add("bounceUp");
+        }, 800);
+        
+        
+    } else if (slideType == "description"){
+        // do stuff
+    }
+
+}
+
+function animationsOnSlider() {
+    let slideType = status.slideType;
+    let description = document.querySelector(".description-1-wrapper");
+    if(slideType == "description") {
+        description.classList = "description-1-wrapper";
+        description.classList.add('bounceUp');
+    }
+    console.log('oioi');
+}
+
+//-----------slider-------------
+//------------------------------
+
+
+const sliderUnit = {
+    // activeSlide
+    // previousSlide
+    // nextSlide
+    // unitWidth
+}
+
+
+function positionSlider (){
+    let slider = document.querySelector(".slider");
+    let width = unitSize()[0];
+    let cover = document.querySelector(".cover");
+
+    if (cover.clientWidth >0) {
+        slider.setAttribute("style", `transform: translateX(${width}px)`);  
+    } 
+} positionSlider();
+
+function startReading() {
+    let coverwidth = document.querySelector(".cover img").clientWidth;
+    let cover = document.querySelector(".cover");
+    let slider = document.querySelector(".slider");
+    let sliderFirst = slider.firstElementChild;
+    let details = document.querySelector("#cnx-unit .details");
+    let bottomDiscovered = document.querySelector(".unit-bottom[discovered]");
+    let bottomSlider = document.querySelector(".unit-bottom[slider]");
+    let logo = document.querySelector(".logo");
+    
+    cover.setAttribute("style", `transform: translateX(-${coverwidth}px)`);
+    slider.setAttribute("style", `transform: translateX(0px)`);
+    details.classList.remove("hide");
+    bottomDiscovered.classList.add("hide");
+    bottomSlider.classList.remove("hide");
+    bottomSlider.classList.remove("hide");
+    status.slideType = "description";
+    logo.classList = "logo flipLogo"
+
+    // update slider object
+    sliderUnit.activeSlide = sliderFirst;
+    sliderUnit.nextSlide = sliderFirst.nextElementSibling;
+
+    sliderUnit.activeSlide.setAttribute("active", "");
+
+    animationsOnSlider()
+
+    setTimeout(function() { cover.classList.add('hide') }, 1000);
+
+}
+
+function changeSlide() {
+    let activeSlide = slideUnit.activeSlide;
+    let nextSlide = slideUnit.nextSlide;
+}
 
 
 function triggerOnResize() {
@@ -114,36 +217,13 @@ function triggerOnResize() {
     displayInfo();
     updateSizeType();
     addSizeClassOnPlayer();
-    bottomSizeforPortrait()
+    bottomSizeforPortrait();
+    positionSlider();
+    
 }
 
 window.onresize = triggerOnResize;
-
-function toggleAnimations(){
-    let slideType = status.slideType;
-
-    
-        if(slideType == "cover") {
-            let title = document.querySelector(".content.cover .title-wrapper");
-            let subtitle = document.querySelector(".content.cover .subtitle-wrapper");
-
-            subtitle.classList.remove("bounceUp");
-            title.classList.remove("bounceUp");
-
-            title.classList.add("bounceUp");
-            setTimeout(function(){ 
-                subtitle.classList.add("bounceUp");
-            }, 400);
-
-
-        } else if (slideType == "description"){
-            // do stuff
-        }
-   
-    
-}
-
-window.onload = toggleAnimations;
+window.onload = animationsOnLoad;
 
 
 

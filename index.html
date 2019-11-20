@@ -21,8 +21,16 @@
                     <div class="unit-wrapper">
                         <div id="unit-main">
                             <div class="slides">
-                                <div active class="slide-1">
-                                    <img src="assets/slides/2.jpg" alt="">
+                                <div class="cover">
+                                    <img src="assets/slides/1.jpg" alt="">
+                                </div>
+                                <div class="slider">
+                                    <div  class="slide-1">
+                                        <img src="assets/slides/2.jpg" alt="">
+                                    </div>
+                                    <div  class="slide-2">
+                                        <img src="assets/slides/3.jpg" alt="">
+                                    </div>
                                 </div>
                             </div>
                             <div class="unit-content">
@@ -36,10 +44,15 @@
                                     </section>
                                     <section class="top-bar v1">
                                         <div class="left">
-                                            <figure class="logo ">
-                                                <img class="logoasset" src="assets/logo/logo1.png" alt="">
+                                            <figure class="logo popLogo">
+                                                <div class="front">
+                                                    <img class="logoasset" src="assets/logo/logo1.png" alt="">
+                                                </div>
+                                                <div class="back">
+                                                        <img class="logoasset" src="assets/logo/larry.png" alt="">
+                                                </div>
                                             </figure>
-                                            <div class="details">
+                                            <div class="details hide">
                                                 <span>Larry Page</span>
                                                 <span> Slide Title</span>
                                             </div>
@@ -66,8 +79,22 @@
                             </div>
                             <footer>
                                 <span>2 minute read</span>
-                                <button class="main">start reading</button>
+                                <button class="main" onclick="startReading()">start reading</button>
                             </footer>
+                        </div>
+                        <div discovered slider class="unit-bottom hide">
+                            <div class="content">
+                                <div class="description-1-wrapper">
+                                    <span class="description-1">
+                                        <em>Lawrence Edward Page </em>is an American computer scientist and Internet entrepreneur. He is best known for being one of the co-founders of <em>Google</em> along with <em>Sergey Brin</em>
+                                    </span>
+                                    <span class="description-2 hide">
+                                        Lawrence Edward Page is an American computer scientist and Internet entrepreneur. He is best known for being one of the co-founders of Google along with Sergey Brin
+                                    </span>
+                                </div>
+                                
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -78,14 +105,14 @@
             </p>
         </section>
         <section class="secondary">
-            <div class="keep-top">
+            <!-- <div class="keep-top">
                 <div style="
-                    display:block;
-                    width: 100px;
-                    height: 100px;
-                    background: var(--testColor);
-                    ">asd</div>
-            </div>
+                display:block;
+                width: 100px;
+                height: 100px;
+                background: var(--testColor);
+                ">asd</div>
+            </div> -->
         </section>
     </div>
     
