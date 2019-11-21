@@ -18,7 +18,7 @@ $breakpointMD: 768px;
     --accentMain-hover: #c13e0a;
     --testColor: red;
     
-    --transitionTiming: .5s ease;
+    --transitionTiming: .5s ease-in-out;
     
 }
 
@@ -163,15 +163,29 @@ figure {
     .cover {
         transition: all var(--transitionTiming); 
         position: absolute; 
-        z-index: 1;
+        z-index: 2;
         top: 0;
         left: 0;
         right: 0;
     }
     .slider {
-        transition: all var(--transitionTiming);
+        background: red;
+        display: block;
         position: absolute;
         top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: all var(--transitionTiming);
+        .slide {
+            transition: all var(--transitionTiming);
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            display: none;
+            &[active] {display: initial; z-index: 1;}
+        }
     }
 }
 
@@ -232,7 +246,7 @@ figure {
                         transform: rotateY(180deg);
                     }
                     .front{
-
+                        
                     }
                 }
             }
@@ -273,91 +287,25 @@ figure {
 
 // -----------unit bottom (bottom half) -----------------
 
-// text sizes per player size
-#cnx-unit{
-    &.large {
-        .unit-bottom {
-            &[cover] {
-                .content {
-                    span.title {font-size: 40px;}
-                    span.subtitle {font-size: 23px;}
-                    .title-spacer{height: 4px;}
-                }
-            }
-            &[slider]{
-                .content {
-                    .description-1{font-size: 26px;}
-                }
-            }
-        }
-    }
-    &.medium {
-        .unit-bottom {
-            &[cover] {
-                .content {
-                    span.title {font-size: 30px;}
-                    span.subtitle{font-size: 18px;}
-                    .title-spacer{height: 4px;}
-                }
-            }
-            &[slider]{
-                .content {
-                    .description-1{font-size: 20px;}
-                }
-            }
-        }
-    }
-    &.small {
-        .unit-bottom {
-            &[cover] {
-                .content {
-                    span.title {font-size: 24px;}
-                    span.subtitle{font-size: 14px;}
-                    .title-spacer{height: 2px;}
-                }
-            }
-            &[slider]{
-                .content {
-                    .description-1{font-size: 16px;}
-                }
-            }
-        }
-    }
-    &.xsmall {
-        .unit-bottom {
-            &[cover] {
-                .content {
-                    span.title {font-size: 22px;}
-                    span.subtitle{font-size: 13px;}
-                    .title-spacer{height: 2px;}
-                }
-            }
-            &[slider]{
-                .content {
-                    .description-1{font-size: 15px;}
-                }
-            }
-        }
-    }
-    
-}
+
 
 .unit-bottom {
     display: block;
     height: var(--bottomSectionHeight);
     border-bottom: 1px solid #dedede;
     position: relative;
-
+    
     //content general
     .content {
         position: absolute;
         z-index: 10;
-        left: var(--playerSidePadding);
-        
-        max-width: calc(100% - 40px);
         .title-spacer{display: block;}
+        #cnx-unit.large & { left: var(--playerSidePadding); max-width: calc(100% - 40px);}
+        #cnx-unit.medium & { left: var(--playerSidePadding); max-width: calc(100% - 40px);}
+        #cnx-unit.small & { left: 16px ; max-width: calc(100% - 32px);}
+        #cnx-unit.xsmall & { left: 12px; max-width: calc(100% - 24px);}
     }
-
+    
     // footer general
     footer {
         position: absolute;
@@ -422,12 +370,162 @@ figure {
                 box-decoration-break: clone;
                 font-weight: 500;
             }
+            .bullet-1-wrapper {
+                ul {
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    li {
+                        margin-bottom: 4px;
+                        > div {transition: all var(--transitionTiming);}
+                       .item-title {
+                            span {
+                                position: relative;
+                                background: #202020;
+                                color: #f1f1f1;
+                                margin: 0;
+                                padding: 2px 6px;
+                                -webkit-box-decoration-break: clone;
+                                box-decoration-break: clone;
+                                font-weight: 500;
+                                &:before {
+                                    content: "";
+                                    position: absolute;
+                                    display: block;
+                                    width: 3px;
+                                    height: 100%;
+                                    background: var(--accentMain);
+                                    left: -3px;
+                                    top: 0;
+                                }
+                                
+                            }
+                        }
+                        &.active {
+                            .item-title span {
+                                background: #f1f1f1;
+                                color: #202020;
+                            }
+                            .item-body {opacity: 1;}
+                        }
+                        .item-body {
+                            transform-origin: top center;
+                            max-height: 0;
+                            opacity: 0;
+                            overflow: hidden;
+                            span {
+                                background: #F1F1F1;
+                                color: #202020;
+                                margin: 0;
+                                padding: 2px 6px;
+                                -webkit-box-decoration-break: clone;
+                                box-decoration-break: clone;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                }
+                
+                
+            }
         }
     }
     footer{
         
     }
 }
+
+
+// text sizes per player size
+#cnx-unit{
+    &.large {
+        .unit-bottom {
+            &[cover] {
+                .content {
+                    span.title {font-size: 40px;}
+                    span.subtitle {font-size: 23px;}
+                    .title-spacer{height: 4px;}
+                }
+            }
+            &[slider]{
+                .content {
+                    .description-1{font-size: 26px;}
+                    .bullet-1-wrapper {
+                        .item-title {font-size: 23px;}
+                        .item-body {font-size: 21px;}
+                        .title-spacer{height: 2px;}
+                    }
+                }
+            }
+        }
+    }
+    &.medium {
+        .unit-bottom {
+            &[cover] {
+                .content {
+                    span.title {font-size: 30px;}
+                    span.subtitle{font-size: 18px;}
+                    .title-spacer{height: 4px;}
+                }
+            }
+            &[slider]{
+                .content {
+                    .description-1{font-size: 20px;}
+                    .bullet-1-wrapper {
+                        .item-title {font-size: 18px;}
+                        .item-body {font-size: 16px;}
+                        .title-spacer{height: 2px;}
+                    }
+                }
+            }
+        }
+    }
+    &.small {
+        .unit-bottom {
+            &[cover] {
+                .content {
+                    span.title {font-size: 24px;}
+                    span.subtitle{font-size: 14px;}
+                    .title-spacer{height: 2px;}
+                }
+            }
+            &[slider]{
+                .content {
+                    .description-1{font-size: 16px;}
+                }
+                .bullet-1-wrapper {
+                    .item-title {font-size: 14px;}
+                    .item-body {font-size: 13px;}
+                    .title-spacer{height: 2px;}
+                }
+            }
+        }
+    }
+    &.xsmall {
+        .unit-bottom {
+            &[cover] {
+                .content {
+                    span.title {font-size: 22px;}
+                    span.subtitle{font-size: 13px;}
+                    .title-spacer{height: 2px;}
+                }
+            }
+            &[slider]{
+                .content {
+                    .description-1{font-size: 15px;}
+                }
+                .bullet-1-wrapper {
+                    .item-title {font-size: 13px;}
+                    .item-body {font-size: 12px;}
+                    .title-spacer{height: 2px;}
+                }
+            }
+        }
+    }
+    
+}
+
+
 
 // cover slide title animation
 @keyframes bounceUp {
@@ -466,7 +564,7 @@ figure {
     60% {
         transform: rotateY(180deg);
     }
-
+    
     80% {
         transform: rotateY(0deg);
     }

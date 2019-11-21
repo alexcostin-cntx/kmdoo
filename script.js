@@ -13,7 +13,7 @@ const status = {
     // unitHeight - number
     // size - (large / medium / small / xsmall)
     // layout - (portrait / landscape)
-    // slideType - (cover/description)
+    // slideType - (cover/description/bullet)
     slideType: "cover"
 }
 
@@ -107,20 +107,14 @@ function bottomSizeforPortrait() {
     }
 }bottomSizeforPortrait();
 
-//-----------animations-------------
-//----------------------------------
-
-
-
-
-//-----------animations-------------
-//----------------------------------
+//-----------cover animations-------------
+//----------------------------------------
 
 function animationsOnLoad(){
     let slideType = status.slideType;
-
+    
     if(slideType == "cover") {
-
+        
         let title = document.querySelector(".content.cover .title-wrapper");
         let subtitle = document.querySelector(".content.cover .subtitle-wrapper");
         let footer = document.querySelector(".unit-bottom[cover] footer");
@@ -140,7 +134,122 @@ function animationsOnLoad(){
     } else if (slideType == "description"){
         // do stuff
     }
+    
+}
 
+//-----------slider-------------
+//------------------------------
+
+const sliderUnit = {
+    // activeSlide
+    // previousSlide
+    // nextSlide
+    slideDuration: 8000
+}
+
+// after pressing start reading slider is triggered
+function startReading() {
+    let coverwidth = document.querySelector(".cover img").clientWidth;
+    let cover = document.querySelector(".cover");
+    let bottomDiscovered = document.querySelector(".unit-bottom[discovered]");
+    let logo = document.querySelector(".logo");
+    let details = document.querySelector("#cnx-unit .details");
+    
+    details.classList.remove("hide"); // details next to logo
+    cover.setAttribute("style", `transform: translateX(-${coverwidth}px)`); // move cover out of view
+    bottomDiscovered.classList.add("hide"); // hide title and content related to cover
+    setTimeout(function() { cover.classList.add('hide') }, 1000);// hide cover after it's out of view
+    
+    logo.classList = "logo flipLogo" // start logo flip animation
+    status.slideType = "description"; // update slider object
+    
+    startSliderLoop();
+    // trigger functions
+    // animationsOnSlider();
+    // changeSlide(); 
+}
+
+
+function startSliderLoop() {
+    let slider = document.querySelector(".slider");
+    let sliderFirst = slider.firstElementChild;
+    let bottomSlider = document.querySelector(".unit-bottom[slider]");
+    
+    sliderFirst.setAttribute("active", ""); // show first slide of slider
+    bottomSlider.classList.remove("hide"); // show bottom side of slider
+    bottomSlider.firstElementChild.classList.remove("hide"); // show bottom content of slider
+    
+    // update slider object
+    sliderUnit.activeSlide = sliderFirst;
+    sliderUnit.nextSlide = sliderFirst.nextElementSibling;
+    sliderUnit.activeSlide.setAttribute("active", "");
+    sliderUnit.previousSlide = sliderFirst;
+    status.slideType = sliderFirst.getAttribute("data-type");
+    console.log(status.slideType);
+    loop();
+}
+
+function loop() {
+    let content = document.querySelector(".content[description]");
+    let text = content.getElementsByClassName("description-1-wrapper")[0];
+    content.classList.remove("hide");
+    text.classList.add('bounceUp');
+    setTimeout(function() { 
+        text.classList = "description-1-wrapper";
+        content.classList.add("hide");
+    }, sliderUnit.slideDuration);
+    
+    setInterval(function(){ 
+        let activeSlide = document.querySelector(".slide[active]");
+        let previousSlide = (activeSlide.previousElementSibling !==null) ? activeSlide.previousElementSibling : null;
+        let nextSlide = (activeSlide.nextElementSibling !==null) ? activeSlide.nextElementSibling : document.querySelector(".slider").firstElementChild ;
+        status.slideType = nextSlide.getAttribute("data-type");
+        
+        activeSlide.setAttribute("style", `transform: translateX(-${activeSlide.firstElementChild.clientWidth}px)`);
+        nextSlide.setAttribute("style", "display: initial");
+        
+        // animate bottom content
+        if (status.slideType === "description") {
+            let content = document.querySelector(".content[description]");
+            let text = content.getElementsByClassName("description-1-wrapper")[0];
+            content.classList.remove("hide");
+            text.classList.add('bounceUp');
+            setTimeout(function() { 
+                text.classList = "description-1-wrapper";
+                content.classList.add("hide");
+            }, sliderUnit.slideDuration);
+            
+        } else if (status.slideType === "bullet-list") {
+            let content = document.querySelector(".content[bullet-list]");
+            let text = content.getElementsByClassName("bullet-1-wrapper")[0];
+            content.classList.remove("hide");
+            text.classList.add('bounceUp');
+            bulletAnimation()
+            setTimeout(function() { 
+                text.classList = "bullet-1-wrapper";
+                content.classList.add("hide");
+            }, sliderUnit.slideDuration);
+        }
+        
+        setTimeout(function() { 
+            nextSlide.setAttribute("active", " ");
+            activeSlide.removeAttribute("active");
+            activeSlide.setAttribute("style", " ");
+            
+            sliderUnit.activeSlide = nextSlide;
+            sliderUnit.previousSlide = activeSlide;
+            sliderUnit.nextSlide = activeSlide.nextElementSibling;
+            if (previousSlide = activeSlide) {
+                //    console.log("equals");
+            } else {
+                // console.log("altu");
+                previousSlide.removeAttribute("active");
+                previousSlide.setAttribute("style", " ");
+            }
+            
+        }, 1000);
+        
+    }, sliderUnit.slideDuration);
 }
 
 function animationsOnSlider() {
@@ -150,67 +259,25 @@ function animationsOnSlider() {
         description.classList = "description-1-wrapper";
         description.classList.add('bounceUp');
     }
-    console.log('oioi');
 }
 
-//-----------slider-------------
-//------------------------------
+// function changeSlide() {
+//     let activeSlide = sliderUnit.activeSlide;
+//     let nextSlide = sliderUnit.nextSlide;
+//     let slideWidth = activeSlide.firstElementChild.clientWidth;
+//     let bottomDescription = document.querySelector(".unit-bottom[slider] .content");
 
+//     setTimeout(function() { 
+//         nextSlide.setAttribute("style", "display: initial; z-index: 1");
+//         activeSlide.setAttribute("style", `transform: translateX(-${slideWidth}px); z-index: 2`);
+//         bottomDescription.classList.add("hide");
+//     }, sliderUnit.slideDuration);
+//     setTimeout(function() {
+//         nextSlide.setAttribute("active", "");
+//         activeSlide.removeAttribute("active");
+//     }, sliderUnit.slideDuration + 1000);
 
-const sliderUnit = {
-    // activeSlide
-    // previousSlide
-    // nextSlide
-    // unitWidth
-}
-
-
-function positionSlider (){
-    let slider = document.querySelector(".slider");
-    let width = unitSize()[0];
-    let cover = document.querySelector(".cover");
-
-    if (cover.clientWidth >0) {
-        slider.setAttribute("style", `transform: translateX(${width}px)`);  
-    } 
-} positionSlider();
-
-function startReading() {
-    let coverwidth = document.querySelector(".cover img").clientWidth;
-    let cover = document.querySelector(".cover");
-    let slider = document.querySelector(".slider");
-    let sliderFirst = slider.firstElementChild;
-    let details = document.querySelector("#cnx-unit .details");
-    let bottomDiscovered = document.querySelector(".unit-bottom[discovered]");
-    let bottomSlider = document.querySelector(".unit-bottom[slider]");
-    let logo = document.querySelector(".logo");
-    
-    cover.setAttribute("style", `transform: translateX(-${coverwidth}px)`);
-    slider.setAttribute("style", `transform: translateX(0px)`);
-    details.classList.remove("hide");
-    bottomDiscovered.classList.add("hide");
-    bottomSlider.classList.remove("hide");
-    bottomSlider.classList.remove("hide");
-    status.slideType = "description";
-    logo.classList = "logo flipLogo"
-
-    // update slider object
-    sliderUnit.activeSlide = sliderFirst;
-    sliderUnit.nextSlide = sliderFirst.nextElementSibling;
-
-    sliderUnit.activeSlide.setAttribute("active", "");
-
-    animationsOnSlider()
-
-    setTimeout(function() { cover.classList.add('hide') }, 1000);
-
-}
-
-function changeSlide() {
-    let activeSlide = slideUnit.activeSlide;
-    let nextSlide = slideUnit.nextSlide;
-}
-
+// }
 
 function triggerOnResize() {
     unitSize();
@@ -218,12 +285,42 @@ function triggerOnResize() {
     updateSizeType();
     addSizeClassOnPlayer();
     bottomSizeforPortrait();
-    positionSlider();
-    
 }
 
 window.onresize = triggerOnResize;
 window.onload = animationsOnLoad;
 
+//-----------bullet list aniamtion-------------
+//---------------------------------------------
 
 
+function bulletAnimation() {
+    let titles = document.querySelectorAll(".content[bullet-list] ul li")
+    let bulletItemDuration = Math.round(sliderUnit.slideDuration / titles.length);
+
+    titles.forEach(function(element, i){
+        let prevElement = (element.previousElementSibling !== null) ? element.previousElementSibling : element ;
+        let itemBody = element.getElementsByClassName('item-body')[0];
+        let prevItemBody = (prevElement !== null) ? prevElement.getElementsByClassName('item-body')[0] : null;
+        let itemHeight = itemBody.scrollHeight;
+        console.log(prevElement.getElementsByClassName('item-body')[0]);
+
+        setTimeout(() => {
+            if(element.classList == "active") {
+                prevItemBody.setAttribute("style", `max-height:0px`);
+                element.classList.remove("active");
+            } else {
+                prevElement.classList.remove("active");
+                element.classList.add("active")
+                prevItemBody.setAttribute("style", `max-height:0px`);
+                itemBody.setAttribute("style", `max-height: ${itemHeight}px`);
+            }
+        }, (i * bulletItemDuration)-2);
+    });
+    titles.forEach(function(element, i){
+        element.className = "";
+        element.getElementsByClassName('item-body')[0].setAttribute("style", `max-height:0px`);
+    });
+
+    
+}
