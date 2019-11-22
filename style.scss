@@ -449,6 +449,19 @@ figure {
                     box-decoration-break: clone;
                     font-size: 19px;
                     font-style: italic;
+                    .open-quote, .closing-quote {
+                        display: inline-block;
+                        width: 20px;
+                        position: relative;
+                        &:after {
+                            content: "";
+                            background: red;
+                            display: block;
+                            width: 14px;
+                            height: 15px;
+                        }
+                    }
+                    .closing-quote {margin-left: 12px;}
                 }
                 .scroll-author  {
                     display: block;

@@ -423,6 +423,21 @@ figure {
   font-size: 19px;
   font-style: italic;
 }
+.unit-bottom[slider] .content .quote-1-wrapper .quote-1 .open-quote, .unit-bottom[slider] .content .quote-1-wrapper .quote-1 .closing-quote {
+  display: inline-block;
+  width: 20px;
+  position: relative;
+}
+.unit-bottom[slider] .content .quote-1-wrapper .quote-1 .open-quote:after, .unit-bottom[slider] .content .quote-1-wrapper .quote-1 .closing-quote:after {
+  content: "";
+  background: red;
+  display: block;
+  width: 14px;
+  height: 15px;
+}
+.unit-bottom[slider] .content .quote-1-wrapper .quote-1 .closing-quote {
+  margin-left: 12px;
+}
 .unit-bottom[slider] .content .quote-1-wrapper .scroll-author {
   display: block;
   width: 1000px;
