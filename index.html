@@ -25,10 +25,10 @@
                                     <img src="assets/slides/cover.jpg" alt="">
                                 </div>
                                 <div class="slider">
-                                    <div  data-type="description" class="slide slide-1">
+                                    <div data-type="description" data-title="First Slide Stuff" class="slide slide-1">
                                         <img src="assets/slides/1.jpg" alt="">
                                     </div>
-                                    <div data-type="bullet-list" class="slide slide-2">
+                                    <div data-type="bullet-list" data-title="Bullet List Slide"class="slide slide-2">
                                         <img src="assets/slides/2.jpg" alt="">
                                     </div>
                                     <!-- <div  class="slide slide-3">
@@ -60,7 +60,7 @@
                                             </figure>
                                             <div class="details hide">
                                                 <span>Larry Page</span>
-                                                <span> Slide Title</span>
+                                                <span class="slide-title"> Slide Title</span>
                                             </div>
                                         </div>
                                         <div class="right">
@@ -140,14 +140,11 @@
             </p>
         </section>
         <section class="secondary">
-            <!-- <div class="keep-top">
-                <div style="
-                display:block;
-                width: 100px;
-                height: 100px;
-                background: var(--testColor);
-                ">asd</div>
-            </div> -->
+            <div class="keep-top">
+                <p>web page container size:</p>
+                <button onclick="pageBig()">Large</button>
+                <button onclick="pageNormal()">Normal</button>
+            </div>
         </section>
     </div>
     

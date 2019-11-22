@@ -19,7 +19,9 @@ $breakpointMD: 768px;
     --testColor: red;
     
     --transitionTiming: .5s ease-in-out;
+    --transitionTimingShort: .2s ease-in-out;
     
+    --pageWidth: 960px;
 }
 
 
@@ -55,7 +57,7 @@ a {
     }
 }
 
-button {
+#cnx-unit button {
     cursor: pointer;
     border: none;
     outline: none;
@@ -63,7 +65,7 @@ button {
     border-radius: 30px;
     padding: 10px 14px;
     color: white;
-    transition: background var(--transitionTiming);
+    transition: background var(--transitionTimingShort);
     &.main {
         background: var(--accentMain);
         text-transform: uppercase;
@@ -93,12 +95,13 @@ svg.icon{
 }
 
 .container {
+    transition: all var(--transitionTiming);
     @media (min-width: $breakpointMD) {
         display: grid;
         grid-template-columns: 2fr 304px;
         gap: $padding;
     }
-    max-width: 960px;
+    max-width: var(--pageWidth);
     width: 100%;
     > section {
         background: white;
@@ -230,6 +233,10 @@ figure {
                     perspective: 1000px;
                     width: 28px;
                     height: 28px;
+                    .large & {
+                        width: 34px;
+                        height: 34px;
+                    }
                     margin: 0 0 0 10px;
                     background: white;
                     margin-right: 2px;
@@ -266,6 +273,10 @@ figure {
                             display: inline-block;
                             line-height: 14px;
                             padding: 0 2px;
+                            .large & {
+                                font-size: 15px;
+                                line-height: 17px;
+                            }
                         }
                         span:first-child {
                             font-weight: 500;

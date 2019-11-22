@@ -12,6 +12,8 @@
   --accentMain-hover: #c13e0a;
   --testColor: red;
   --transitionTiming: .5s ease-in-out;
+  --transitionTimingShort: .2s ease-in-out;
+  --pageWidth: 960px;
 }
 
 body {
@@ -41,7 +43,7 @@ a.control {
   justify-content: center;
 }
 
-button {
+#cnx-unit button {
   cursor: pointer;
   border: none;
   outline: none;
@@ -49,13 +51,13 @@ button {
   border-radius: 30px;
   padding: 10px 14px;
   color: white;
-  transition: background var(--transitionTiming);
+  transition: background var(--transitionTimingShort);
 }
-button.main {
+#cnx-unit button.main {
   background: var(--accentMain);
   text-transform: uppercase;
 }
-button.main:hover {
+#cnx-unit button.main:hover {
   background: var(--accentMain-hover);
 }
 
@@ -75,7 +77,8 @@ svg.icon {
 }
 
 .container {
-  max-width: 960px;
+  transition: all var(--transitionTiming);
+  max-width: var(--pageWidth);
   width: 100%;
 }
 @media (min-width: 768px) {
@@ -221,6 +224,10 @@ figure {
   background: white;
   margin-right: 2px;
 }
+.large .unit-content .content-top .top-bar figure.logo {
+  width: 34px;
+  height: 34px;
+}
 .unit-content .content-top .top-bar figure.logo img {
   width: 100%;
 }
@@ -250,6 +257,10 @@ figure {
   display: inline-block;
   line-height: 14px;
   padding: 0 2px;
+}
+.large .unit-content .content-top .top-bar.v1 .left .details span {
+  font-size: 15px;
+  line-height: 17px;
 }
 .unit-content .content-top .top-bar.v1 .left .details span:first-child {
   font-weight: 500;
