@@ -23,7 +23,7 @@ const sliderUnit = {
     // activeSlide
     // previousSlide
     // nextSlide
-    slideDuration: 8000
+    slideDuration: 10000
 }
 
 //-----------------------------------------
@@ -101,7 +101,7 @@ function addSizeClassOnPlayer(){
 // prints unit width, height, and sizetype
 function displayInfo() {
     let arr = unitSize();
-    sizeP.innerHTML = `unit width: ${arr[0]}px | unit height: ${arr[1]}px | ( ${status.size} )`;
+    sizeP.innerHTML = `unit width: ${arr[0]}px | unit height: ${arr[1]}px | ( ${status.size} ) | slide duration: ${sliderUnit.slideDuration/1000}s`;
 } displayInfo();
 
 //if the player is portrait then the bottom part is dinamically computed (1/4 * player width)
@@ -205,6 +205,16 @@ function loop() {
                 text.classList = "bullet-1-wrapper";
                 content.classList.add("hide");
             }, sliderUnit.slideDuration);
+        } else if (status.slideType === "quote") {
+            let content = document.querySelector(".content[quote]");
+            let text = content.getElementsByClassName("quote-1-wrapper")[0];
+            content.classList.remove("hide");
+            text.classList.add('bounceUp');
+            scrollQuoteAuthor();
+            setTimeout(function() { 
+                text.classList = "quote-1-wrapper";
+                content.classList.add("hide");
+            }, sliderUnit.slideDuration);
         }
         
         setTimeout(function() { 
@@ -232,7 +242,28 @@ function getSlideTitle() {
     let titleText = document.querySelector(`.slide[data-type="${status.slideType}"]`).getAttribute("data-title");
     let slideTitletoReplace = document.querySelector(".details .slide-title");
     slideTitletoReplace.innerHTML = titleText;
-    // console.log(slideTitletoReplace);
+}
+
+function scrollQuoteAuthor() {
+    let authorWrapper = document.querySelector(".scroll-author");
+    let author = document.querySelector(".author-1");
+    let unitwidth = unitSize()[0];
+    let scrollLength = author.offsetWidth - unitwidth + 20;
+    let scrollDuration = sliderUnit.slideDuration - 3000;
+    authorWrapper.removeAttribute("style");
+
+    setTimeout(function() { 
+        
+        authorWrapper.setAttribute(
+            "style",
+            `
+            transition: all ${scrollDuration/1000}s linear;
+            transform: translateX(-${scrollLength}px);
+            `
+        );
+    }, 2000);
+
+    
 }
 
 // function animationsOnSlider() {

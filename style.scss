@@ -389,7 +389,7 @@ figure {
                     li {
                         margin-bottom: 4px;
                         > div {transition: all var(--transitionTiming);}
-                       .item-title {
+                        .item-title {
                             span {
                                 position: relative;
                                 background: #202020;
@@ -439,6 +439,29 @@ figure {
                 
                 
             }
+            .quote-1-wrapper {
+                .quote-1 {
+                    background: #F1F1F1;
+                    color: #202020;
+                    margin: 0;
+                    padding: 2px 6px;
+                    -webkit-box-decoration-break: clone;
+                    box-decoration-break: clone;
+                    font-size: 19px;
+                    font-style: italic;
+                }
+                .scroll-author  {
+                    display: block;
+                    width: 1000px;
+                    padding-top: 10px;
+                    .author-1 {
+                        font-size: 14px;
+                        margin-top: 4px;
+                        font-weight: 300;
+                    }
+                }
+            }
+            
         }
     }
     footer{
@@ -449,6 +472,7 @@ figure {
 
 // text sizes per player size
 #cnx-unit{
+    overflow: hidden;
     &.large {
         .unit-bottom {
             &[cover] {
@@ -465,6 +489,9 @@ figure {
                         .item-title {font-size: 23px;}
                         .item-body {font-size: 21px;}
                         .title-spacer{height: 2px;}
+                    }
+                    .quote-1 {
+                        font-size: 26px;
                     }
                 }
             }
@@ -486,6 +513,9 @@ figure {
                         .item-title {font-size: 18px;}
                         .item-body {font-size: 16px;}
                         .title-spacer{height: 2px;}
+                    }
+                    .quote-1{
+                        font-size: 20px;
                     }
                 }
             }
@@ -509,6 +539,9 @@ figure {
                     .item-body {font-size: 13px;}
                     .title-spacer{height: 2px;}
                 }
+                .quote-1 {
+                    font-size: 16px;
+                }
             }
         }
     }
@@ -529,6 +562,9 @@ figure {
                     .item-title {font-size: 13px;}
                     .item-body {font-size: 12px;}
                     .title-spacer{height: 2px;}
+                }
+                .quote-1 {
+                    font-size: 14px;
                 }
             }
         }

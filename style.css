@@ -413,6 +413,29 @@ figure {
   box-decoration-break: clone;
   font-weight: 400;
 }
+.unit-bottom[slider] .content .quote-1-wrapper .quote-1 {
+  background: #F1F1F1;
+  color: #202020;
+  margin: 0;
+  padding: 2px 6px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  font-size: 19px;
+  font-style: italic;
+}
+.unit-bottom[slider] .content .quote-1-wrapper .scroll-author {
+  display: block;
+  width: 1000px;
+  padding-top: 10px;
+}
+.unit-bottom[slider] .content .quote-1-wrapper .scroll-author .author-1 {
+  font-size: 14px;
+  margin-top: 4px;
+  font-weight: 300;
+}
+#cnx-unit {
+  overflow: hidden;
+}
 #cnx-unit.large .unit-bottom[cover] .content span.title {
   font-size: 40px;
 }
@@ -433,6 +456,9 @@ figure {
 }
 #cnx-unit.large .unit-bottom[slider] .content .bullet-1-wrapper .title-spacer {
   height: 2px;
+}
+#cnx-unit.large .unit-bottom[slider] .content .quote-1 {
+  font-size: 26px;
 }
 #cnx-unit.medium .unit-bottom[cover] .content span.title {
   font-size: 30px;
@@ -455,6 +481,9 @@ figure {
 #cnx-unit.medium .unit-bottom[slider] .content .bullet-1-wrapper .title-spacer {
   height: 2px;
 }
+#cnx-unit.medium .unit-bottom[slider] .content .quote-1 {
+  font-size: 20px;
+}
 #cnx-unit.small .unit-bottom[cover] .content span.title {
   font-size: 24px;
 }
@@ -476,6 +505,9 @@ figure {
 #cnx-unit.small .unit-bottom[slider] .bullet-1-wrapper .title-spacer {
   height: 2px;
 }
+#cnx-unit.small .unit-bottom[slider] .quote-1 {
+  font-size: 16px;
+}
 #cnx-unit.xsmall .unit-bottom[cover] .content span.title {
   font-size: 22px;
 }
@@ -496,6 +528,9 @@ figure {
 }
 #cnx-unit.xsmall .unit-bottom[slider] .bullet-1-wrapper .title-spacer {
   height: 2px;
+}
+#cnx-unit.xsmall .unit-bottom[slider] .quote-1 {
+  font-size: 14px;
 }
 
 @keyframes bounceUp {
