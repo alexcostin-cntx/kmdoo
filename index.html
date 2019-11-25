@@ -48,7 +48,7 @@
                                         <span><figure></figure></span>
                                         <span><figure></figure></span>
                                     </section>
-                                    <section class="top-bar v1">
+                                    <section class="top-bar v1 ">
                                         <div class="left">
                                             <figure class="logo popLogo">
                                                 <div class="front">
@@ -132,7 +132,16 @@
                                 <div quote class="content hide">
                                     <div class="quote-1-wrapper">
                                         <span class="quote-1">
-                                            <span class="open-quote"></span>For a lot of companies, it’s useful for them to feel like they have an obvious competitor and to rally around that. I personally believe it’s better to shoot higher. You don’t want to be looking at your competitors. You want to be looking at what’s possible and how to make the world better<span class="closing-quote"></span>
+                                            <span class="open-quote">
+                                                <svg class="icon">
+                                                    <use xlink:href="#open-quote"></use>
+                                                </svg>
+                                            </span>For a lot of companies, it’s useful for them to feel like they have an obvious competitor and to rally around that. I personally believe it’s better to shoot higher. You don’t want to be looking at your competitors. You want to be looking at what’s possible and how to make the world better
+                                            <span class="closing-quote">
+                                                <svg class="icon">
+                                                    <use xlink:href="#close-quote"></use>
+                                                </svg>
+                                            </span>
                                         </span>
                                         <div class="scroll-author">
                                             <span class="author-1">
@@ -153,9 +162,21 @@
             </section>
             <section class="secondary">
                 <div class="keep-top">
-                    <p>web page container size:</p>
-                    <button onclick="pageBig()">Large</button>
-                    <button onclick="pageNormal()">Normal</button>
+                    <div>
+                            <p>web page container size:</p>
+                            <button onclick="pageBig()">Large</button>
+                            <button onclick="pageNormal()">Normal</button>
+                    </div>
+                    <div class="spacer" style="display: block; height: 10px"></div>
+                    <div id="logoFlipPicker" class="hide">
+                            <p>logo flip:</p>
+                            <button id="logoflip" class="flip" onclick="logoKeepAvatar()" ><span class="active left">Yes</span> <span class="right">No</span></button>
+                    </div>
+                    <div class="spacer" style="display: block; height: 10px"></div>
+                    <div>
+                            <p>accent picker</p>
+                            <input type="color" id="picker" name="picker" >
+                    </div>
                 </div>
             </section>
         </div>

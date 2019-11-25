@@ -75,6 +75,24 @@ a {
     }
 }
 
+button.flip
+{
+    outline: none;
+    cursor: pointer;
+    padding: 0px; 
+    background: none; 
+    border: 1px solid #3a99ec;
+    display: flex;
+    span{
+        padding: 4px 10px;
+        color: #a0a0a0;
+        &.active{
+            background: #3a99ec;
+            color: #fff;
+
+        }
+    }
+} 
 //------------------------utility-------------------------------
 //--------------------------------------------------------------
 
@@ -257,41 +275,40 @@ figure {
                     }
                 }
             }
-            &.v1 {
-                .left {
+            .left {
+                display: flex;
+                flex-grow: 1;
+                align-items: center;
+                .details {
                     display: flex;
-                    flex-grow: 1;
-                    align-items: center;
-                    .details {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: flex-start;
-                        span {
-                            font-size: 13px;
-                            background: #fff;
-                            color: black;
-                            display: inline-block;
-                            line-height: 14px;
-                            padding: 0 2px;
-                            .large & {
-                                font-size: 15px;
-                                line-height: 17px;
-                            }
+                    flex-direction: column;
+                    align-items: flex-start;
+                    span {
+                        font-size: 13px;
+                        background: #fff;
+                        color: black;
+                        display: inline-block;
+                        line-height: 14px;
+                        padding: 0 2px;
+                        .large & {
+                            font-size: 15px;
+                            line-height: 17px;
                         }
-                        span:first-child {
-                            font-weight: 500;
-                        }
-                        span:nth-child(2) {
-                            font-weight: 300;
-                        }
-                        
-                        * {margin:0; padding:0}
                     }
-                }
-                .right {
-                    display: flex;
+                    span:first-child {
+                        font-weight: 500;
+                    }
+                    span:nth-child(2) {
+                        font-weight: 300;
+                    }
+                    
+                    * {margin:0; padding:0}
                 }
             }
+            .right {
+                display: flex;
+            }
+            
         }
     }
 }
@@ -450,16 +467,15 @@ figure {
                     font-size: 19px;
                     font-style: italic;
                     .open-quote, .closing-quote {
-                        display: inline-block;
-                        width: 20px;
-                        position: relative;
-                        &:after {
-                            content: "";
-                            background: red;
-                            display: block;
-                            width: 14px;
-                            height: 15px;
+                        svg { 
+                            fill: var(--accentMain);
+                            vertical-align: middle;
+                            height: 22px;
+                            width: 25px;
                         }
+                        display: inline-block;
+                        width: 26px;
+                        position: relative;
                     }
                     .closing-quote {margin-left: 12px;}
                 }

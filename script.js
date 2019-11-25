@@ -1,6 +1,7 @@
 const sizeP = document.getElementById('unit-size');
 const cnxUnit = document.getElementById('cnx-unit');
 const unitMain = document.getElementById('unit-main');
+let picker = document.getElementById("picker");
 
 const large = 570;
 const medium = 400;
@@ -23,7 +24,7 @@ const sliderUnit = {
     // activeSlide
     // previousSlide
     // nextSlide
-    slideDuration: 10000
+    slideDuration: 4000
 }
 
 //-----------------------------------------
@@ -130,6 +131,7 @@ function startReading() {
     let bottomDiscovered = document.querySelector(".unit-bottom[discovered]");
     let logo = document.querySelector(".logo");
     let details = document.querySelector("#cnx-unit .details");
+    let pickerButton = document.getElementById("logoFlipPicker"); // picker button on the side column
     
     details.classList.remove("hide"); // details next to logo
     cover.setAttribute("style", `transform: translateX(-${coverwidth}px)`); // move cover out of view
@@ -140,6 +142,7 @@ function startReading() {
     status.slideType = "description"; // update slider object
     
     startSliderLoop();
+    pickerButton.classList.remove("hide"); // shows logo flip animation picker
 }
 
 
@@ -151,6 +154,8 @@ function startSliderLoop() {
     sliderFirst.setAttribute("active", ""); // show first slide of slider
     bottomSlider.classList.remove("hide"); // show bottom side of slider
     bottomSlider.firstElementChild.classList.remove("hide"); // show bottom content of slider
+
+    centerImages(sliderFirst);
     
     // update slider object
     sliderUnit.activeSlide = sliderFirst;
@@ -180,10 +185,12 @@ function loop() {
         status.slideType = nextSlide.getAttribute("data-type");
 
         getSlideTitle();// replaces slide title text with data-title from the .slide html element
-
         activeSlide.setAttribute("style", `transform: translateX(-${activeSlide.firstElementChild.clientWidth}px)`);
         nextSlide.setAttribute("style", "display: initial");
+        centerImages(nextSlide);
+
         
+
         // animate bottom content
         if (status.slideType === "description") {
             let content = document.querySelector(".content[description]");
@@ -216,7 +223,7 @@ function loop() {
                 content.classList.add("hide");
             }, sliderUnit.slideDuration);
         }
-        
+
         setTimeout(function() { 
             nextSlide.setAttribute("active", " ");
             activeSlide.removeAttribute("active");
@@ -238,42 +245,24 @@ function loop() {
     }, sliderUnit.slideDuration);
 }
 
+
 function getSlideTitle() {
     let titleText = document.querySelector(`.slide[data-type="${status.slideType}"]`).getAttribute("data-title");
     let slideTitletoReplace = document.querySelector(".details .slide-title");
     slideTitletoReplace.innerHTML = titleText;
 }
 
-function scrollQuoteAuthor() {
-    let authorWrapper = document.querySelector(".scroll-author");
-    let author = document.querySelector(".author-1");
-    let unitwidth = unitSize()[0];
-    let scrollLength = author.offsetWidth - unitwidth + 20;
-    let scrollDuration = sliderUnit.slideDuration - 3000;
-    authorWrapper.removeAttribute("style");
-
-    setTimeout(function() { 
-        
-        authorWrapper.setAttribute(
-            "style",
-            `
-            transition: all ${scrollDuration/1000}s linear;
-            transform: translateX(-${scrollLength}px);
-            `
-        );
-    }, 2000);
-
-    
+function centerImages(slide){
+    let image = slide.querySelector("img");
+    let unitWidth = unitSize()[0];
+    // console.log(image);
+    // if (status.layout == "landscape") {
+    //     console.log('land');
+    // } else {
+    //     console.log('por');
+    // }
+        image.setAttribute("style", `position: relative; left: -${(image.clientWidth - unitWidth)/2}px`)
 }
-
-// function animationsOnSlider() {
-//     let slideType = status.slideType;
-//     let description = document.querySelector(".description-1-wrapper");
-//     if(slideType == "description") {
-//         description.classList = "description-1-wrapper";
-//         description.classList.add('bounceUp');
-//     }
-// }
 
 //-------------------animations----------------
 //---------------------------------------------
@@ -338,6 +327,28 @@ function animationsOnLoad(){
     
 }
 
+// scroll quote title
+function scrollQuoteAuthor() {
+    let authorWrapper = document.querySelector(".scroll-author");
+    let author = document.querySelector(".author-1");
+    let unitwidth = unitSize()[0];
+    let scrollLength = author.offsetWidth - unitwidth + 20;
+    let scrollDuration = sliderUnit.slideDuration - 3000;
+    authorWrapper.removeAttribute("style");
+
+    setTimeout(function() { 
+        
+        authorWrapper.setAttribute(
+            "style",
+            `
+            transition: all ${scrollDuration/1000}s linear;
+            transform: translateX(-${scrollLength}px);
+            `
+        );
+    }, 2000);
+}
+
+
 //----------------aux functions---------------
 //---------------------------------------------
 
@@ -357,6 +368,33 @@ function pageNormal() {
     }, 1000);
 }
 
+function logoKeepAvatar() {
+    let logo = document.querySelector(".logo");
+    let btn = document.getElementById("logoflip");
+    let spanleft = btn.getElementsByClassName("left")[0];
+    let spanright = btn.getElementsByClassName("right")[0];
+    // console.log(spanleft);
+    if (logo.classList.contains("flipLogo")) {
+        logo.classList.remove("flipLogo")
+        spanleft.classList.remove("active");
+        spanright.classList.add("active");
+    } else {
+        logo.classList.add("flipLogo");
+        spanright.classList.remove("active");
+        spanleft.classList.add("active");
+
+    }
+}
+
+function setColoronpicker() {
+    let accent = getComputedStyle(document.documentElement).getPropertyValue('--accentMain');
+    picker.value = accent.replace(/\s/g, '');;
+}
+
+picker.addEventListener("input", function() {
+    document.documentElement.style
+    .setProperty('--accentMain', `${picker.value}`);
+}, false);
 
 function triggerOnResize() {
     unitSize();
@@ -366,8 +404,13 @@ function triggerOnResize() {
     bottomSizeforPortrait();
 }
 
+function triggerOnLoad() {
+   animationsOnLoad();
+   setColoronpicker();
+}
+
 //---------------------------------------------
 //---------------------------------------------
 
 window.onresize = triggerOnResize;
-window.onload = animationsOnLoad;
+window.onload = triggerOnLoad;

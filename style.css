@@ -61,6 +61,23 @@ a.control {
   background: var(--accentMain-hover);
 }
 
+button.flip {
+  outline: none;
+  cursor: pointer;
+  padding: 0px;
+  background: none;
+  border: 1px solid #3a99ec;
+  display: flex;
+}
+button.flip span {
+  padding: 4px 10px;
+  color: #a0a0a0;
+}
+button.flip span.active {
+  background: #3a99ec;
+  color: #fff;
+}
+
 .hide {
   display: none !important;
 }
@@ -240,17 +257,17 @@ figure {
 .unit-content .content-top .top-bar figure.logo .back {
   transform: rotateY(180deg);
 }
-.unit-content .content-top .top-bar.v1 .left {
+.unit-content .content-top .top-bar .left {
   display: flex;
   flex-grow: 1;
   align-items: center;
 }
-.unit-content .content-top .top-bar.v1 .left .details {
+.unit-content .content-top .top-bar .left .details {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-.unit-content .content-top .top-bar.v1 .left .details span {
+.unit-content .content-top .top-bar .left .details span {
   font-size: 13px;
   background: #fff;
   color: black;
@@ -258,21 +275,21 @@ figure {
   line-height: 14px;
   padding: 0 2px;
 }
-.large .unit-content .content-top .top-bar.v1 .left .details span {
+.large .unit-content .content-top .top-bar .left .details span {
   font-size: 15px;
   line-height: 17px;
 }
-.unit-content .content-top .top-bar.v1 .left .details span:first-child {
+.unit-content .content-top .top-bar .left .details span:first-child {
   font-weight: 500;
 }
-.unit-content .content-top .top-bar.v1 .left .details span:nth-child(2) {
+.unit-content .content-top .top-bar .left .details span:nth-child(2) {
   font-weight: 300;
 }
-.unit-content .content-top .top-bar.v1 .left .details * {
+.unit-content .content-top .top-bar .left .details * {
   margin: 0;
   padding: 0;
 }
-.unit-content .content-top .top-bar.v1 .right {
+.unit-content .content-top .top-bar .right {
   display: flex;
 }
 
@@ -425,15 +442,14 @@ figure {
 }
 .unit-bottom[slider] .content .quote-1-wrapper .quote-1 .open-quote, .unit-bottom[slider] .content .quote-1-wrapper .quote-1 .closing-quote {
   display: inline-block;
-  width: 20px;
+  width: 26px;
   position: relative;
 }
-.unit-bottom[slider] .content .quote-1-wrapper .quote-1 .open-quote:after, .unit-bottom[slider] .content .quote-1-wrapper .quote-1 .closing-quote:after {
-  content: "";
-  background: red;
-  display: block;
-  width: 14px;
-  height: 15px;
+.unit-bottom[slider] .content .quote-1-wrapper .quote-1 .open-quote svg, .unit-bottom[slider] .content .quote-1-wrapper .quote-1 .closing-quote svg {
+  fill: var(--accentMain);
+  vertical-align: middle;
+  height: 22px;
+  width: 25px;
 }
 .unit-bottom[slider] .content .quote-1-wrapper .quote-1 .closing-quote {
   margin-left: 12px;
