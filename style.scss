@@ -18,10 +18,17 @@ $breakpointMD: 768px;
     --accentMain-hover: #c13e0a;
     --testColor: red;
     
+    
+    --transitionTimingLong: .7s cubic-bezier(0.47,-0.02, 0.99, 0.26);
     --transitionTiming: .5s ease-in-out;
     --transitionTimingShort: .2s ease-in-out;
     
+    --shrinkDuration: 1s;
+    --loadDuration: 2s;
+    
     --pageWidth: 960px;
+    
+    // --dashArray: 88px;
 }
 
 
@@ -72,9 +79,43 @@ a {
         &:hover {
             background: var(--accentMain-hover);
         }
+        &.v2 {
+            position: relative;
+            padding-left: 44px;
+            display: flex;
+            .loader {
+                svg {
+                    width: 36px;
+                    position: absolute;
+                    left: 3px;
+                    top: 1px;
+                    height: 100%;
+                    
+                }
+                #count{
+                    color: white;
+                    font-size: 14px;
+                    font-weight: 800;
+                    position: absolute;
+                    left: 9px;
+                    text-align: center;
+                    width: 19px;
+                }
+            }
+        }
     }
+    
 }
-
+#strokee {
+    stroke-dasharray: 88;
+	stroke-dashoffset: 88;
+    animation-name: load;
+    animation-duration: var(--loadDuration);
+    animation-timing-function: linear;
+    // animation-delay: ;
+    // animation-iteration-count: infinite;
+    // animation-fill-mode: forwards;
+}
 button.flip
 {
     outline: none;
@@ -89,7 +130,7 @@ button.flip
         &.active{
             background: #3a99ec;
             color: #fff;
-
+            
         }
     }
 } 
@@ -147,7 +188,7 @@ figure {
 #unit-main {
     &.landscape {
         padding-top: 56.25%; /* 16:9 Aspect Ratio */ 
-        .slides img {width: 100%; height: auto;}
+        .slides img {width: 100%; height: auto; }
     }
     &.portrait {
         padding-top: 100%; /* 1:1 Aspect Ratio */ 
@@ -630,6 +671,16 @@ figure {
     }
 }
 
+@keyframes shrinkImage {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(1.2);
+    }
+}
+
+
 @keyframes flipLogo {
     0%{
         transform: rotateY(0deg);
@@ -646,7 +697,16 @@ figure {
     }
 }
 
+@keyframes load {
+	from {
+		stroke-dashoffset: 88;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
 
 .bounceUp {animation: bounceUp 1s ease ;animation-fill-mode: forwards;}
 .popLogo {animation: popLogo 1s ease;animation-fill-mode: forwards;}
 .flipLogo {animation: flipLogo 4s ease infinite;}
+.shrinkImage{animation: shrinkImage var(--shrinkDuration) linear; animation-fill-mode: forwards;}

@@ -24,7 +24,7 @@ const sliderUnit = {
     // activeSlide
     // previousSlide
     // nextSlide
-    slideDuration: 4000
+    slideDuration: 10000
 }
 
 //-----------------------------------------
@@ -185,8 +185,9 @@ function loop() {
         status.slideType = nextSlide.getAttribute("data-type");
 
         getSlideTitle();// replaces slide title text with data-title from the .slide html element
-        activeSlide.setAttribute("style", `transform: translateX(-${activeSlide.firstElementChild.clientWidth}px)`);
-        nextSlide.setAttribute("style", "display: initial");
+        // activeSlide.setAttribute("style", `transform: translateX(-${activeSlide.firstElementChild.clientWidth}px); opacity:0`);
+        activeSlide.setAttribute("style", "opacity:0;");
+        nextSlide.setAttribute("style", "display: initial; ");
         centerImages(nextSlide);
 
         
@@ -252,16 +253,15 @@ function getSlideTitle() {
     slideTitletoReplace.innerHTML = titleText;
 }
 
+
 function centerImages(slide){
     let image = slide.querySelector("img");
     let unitWidth = unitSize()[0];
-    // console.log(image);
-    // if (status.layout == "landscape") {
-    //     console.log('land');
-    // } else {
-    //     console.log('por');
-    // }
-        image.setAttribute("style", `position: relative; left: -${(image.clientWidth - unitWidth)/2}px`)
+
+    document.documentElement.style.setProperty('--shrinkDuration', `${sliderUnit.slideDuration/1000}s`);
+    image.classList.remove("shrinkImage");
+    image.setAttribute("style", `position: relative; left: -${(image.clientWidth - unitWidth)/2}px;`);
+    image.classList.add("shrinkImage");
 }
 
 //-------------------animations----------------
@@ -396,6 +396,32 @@ picker.addEventListener("input", function() {
     .setProperty('--accentMain', `${picker.value}`);
 }, false);
 
+
+function countDown() {
+    let stroke = document.getElementById("strokee");
+    let count = document.getElementById("count");
+    let totalSeconds = sliderUnit.slideDuration/1000 ;
+    
+
+    document.documentElement.style
+    .setProperty('--loadDuration', `${sliderUnit.slideDuration/1000}s`);
+
+    setInterval(function(){
+        count.innerHTML = totalSeconds;
+        totalSeconds -= 1;
+    }, 1000)
+
+    setTimeout(function() {
+        let cover = document.getElementsByClassName('cover')[0];
+        if (cover.classList.contains("hide")) {
+            console.log("asd");
+        } else {
+            startReading();
+        }
+        
+    }, sliderUnit.slideDuration);
+}
+
 function triggerOnResize() {
     unitSize();
     updateSizeType();
@@ -407,6 +433,7 @@ function triggerOnResize() {
 function triggerOnLoad() {
    animationsOnLoad();
    setColoronpicker();
+   countDown();
 }
 
 //---------------------------------------------

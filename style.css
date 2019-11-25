@@ -11,8 +11,11 @@
   --accentMain: #f05414;
   --accentMain-hover: #c13e0a;
   --testColor: red;
+  --transitionTimingLong: .7s cubic-bezier(0.47,-0.02, 0.99, 0.26);
   --transitionTiming: .5s ease-in-out;
   --transitionTimingShort: .2s ease-in-out;
+  --shrinkDuration: 1s;
+  --loadDuration: 2s;
   --pageWidth: 960px;
 }
 
@@ -59,6 +62,35 @@ a.control {
 }
 #cnx-unit button.main:hover {
   background: var(--accentMain-hover);
+}
+#cnx-unit button.main.v2 {
+  position: relative;
+  padding-left: 44px;
+  display: flex;
+}
+#cnx-unit button.main.v2 .loader svg {
+  width: 36px;
+  position: absolute;
+  left: 3px;
+  top: 1px;
+  height: 100%;
+}
+#cnx-unit button.main.v2 .loader #count {
+  color: white;
+  font-size: 14px;
+  font-weight: 800;
+  position: absolute;
+  left: 9px;
+  text-align: center;
+  width: 19px;
+}
+
+#strokee {
+  stroke-dasharray: 88;
+  stroke-dashoffset: 88;
+  animation-name: load;
+  animation-duration: var(--loadDuration);
+  animation-timing-function: linear;
 }
 
 button.flip {
@@ -587,6 +619,14 @@ figure {
     transform-origin: center center;
   }
 }
+@keyframes shrinkImage {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
 @keyframes flipLogo {
   0% {
     transform: rotateY(0deg);
@@ -601,6 +641,14 @@ figure {
     transform: rotateY(0deg);
   }
 }
+@keyframes load {
+  from {
+    stroke-dashoffset: 88;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 .bounceUp {
   animation: bounceUp 1s ease;
   animation-fill-mode: forwards;
@@ -613,6 +661,11 @@ figure {
 
 .flipLogo {
   animation: flipLogo 4s ease infinite;
+}
+
+.shrinkImage {
+  animation: shrinkImage var(--shrinkDuration) linear;
+  animation-fill-mode: forwards;
 }
 
 /*# sourceMappingURL=style.css.map */
