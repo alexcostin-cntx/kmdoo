@@ -131,18 +131,16 @@ function startReading() {
     let bottomDiscovered = document.querySelector(".unit-bottom[discovered]");
     let logo = document.querySelector(".logo");
     let details = document.querySelector("#cnx-unit .details");
-    let pickerButton = document.getElementById("logoFlipPicker"); // picker button on the side column
     
     details.classList.remove("hide"); // details next to logo
     cover.setAttribute("style", `transform: translateX(-${coverwidth}px)`); // move cover out of view
     bottomDiscovered.classList.add("hide"); // hide title and content related to cover
     setTimeout(function() { cover.classList.add('hide') }, 1000);// hide cover after it's out of view
     
-    logo.classList = "logo flipLogo" // start logo flip animation
+    logo.classList = "logo avatar" // start logo flip animation
     status.slideType = "description"; // update slider object
     
     startSliderLoop();
-    pickerButton.classList.remove("hide"); // shows logo flip animation picker
 }
 
 
@@ -368,23 +366,23 @@ function pageNormal() {
     }, 1000);
 }
 
-function logoKeepAvatar() {
-    let logo = document.querySelector(".logo");
-    let btn = document.getElementById("logoflip");
-    let spanleft = btn.getElementsByClassName("left")[0];
-    let spanright = btn.getElementsByClassName("right")[0];
-    // console.log(spanleft);
-    if (logo.classList.contains("flipLogo")) {
-        logo.classList.remove("flipLogo")
-        spanleft.classList.remove("active");
-        spanright.classList.add("active");
-    } else {
-        logo.classList.add("flipLogo");
-        spanright.classList.remove("active");
-        spanleft.classList.add("active");
+// function logoKeepAvatar() {
+//     let logo = document.querySelector(".logo");
+//     let btn = document.getElementById("logoflip");
+//     let spanleft = btn.getElementsByClassName("left")[0];
+//     let spanright = btn.getElementsByClassName("right")[0];
+//     // console.log(spanleft);
+//     if (logo.classList.contains("flipLogo")) {
+//         logo.classList.remove("flipLogo")
+//         spanleft.classList.remove("active");
+//         spanright.classList.add("active");
+//     } else {
+//         logo.classList.add("flipLogo");
+//         spanright.classList.remove("active");
+//         spanleft.classList.add("active");
 
-    }
-}
+//     }
+// }
 
 function setColoronpicker() {
     let accent = getComputedStyle(document.documentElement).getPropertyValue('--accentMain');

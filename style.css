@@ -289,6 +289,12 @@ figure {
 .unit-content .content-top .top-bar figure.logo .back {
   transform: rotateY(180deg);
 }
+.unit-content .content-top .top-bar figure.logo.avatar .front {
+  display: none;
+}
+.unit-content .content-top .top-bar figure.logo.avatar .back {
+  transform: rotateY(0deg);
+}
 .unit-content .content-top .top-bar .left {
   display: flex;
   flex-grow: 1;
@@ -627,20 +633,6 @@ figure {
     transform: scale(1.2);
   }
 }
-@keyframes flipLogo {
-  0% {
-    transform: rotateY(0deg);
-  }
-  20% {
-    transform: rotateY(180deg);
-  }
-  60% {
-    transform: rotateY(180deg);
-  }
-  80% {
-    transform: rotateY(0deg);
-  }
-}
 @keyframes load {
   from {
     stroke-dashoffset: 88;
@@ -657,10 +649,6 @@ figure {
 .popLogo {
   animation: popLogo 1s ease;
   animation-fill-mode: forwards;
-}
-
-.flipLogo {
-  animation: flipLogo 4s ease infinite;
 }
 
 .shrinkImage {

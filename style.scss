@@ -314,6 +314,10 @@ figure {
                     .front{
                         
                     }
+                    &.avatar{
+                        .front{display: none}
+                        .back{transform: rotateY(0deg);}
+                    }
                 }
             }
             .left {
@@ -681,21 +685,21 @@ figure {
 }
 
 
-@keyframes flipLogo {
-    0%{
-        transform: rotateY(0deg);
-    }
-    20% {
-        transform: rotateY(180deg);
-    }
-    60% {
-        transform: rotateY(180deg);
-    }
+// @keyframes flipLogo {
+//     0%{
+//         transform: rotateY(0deg);
+//     }
+//     20% {
+//         transform: rotateY(180deg);
+//     }
+//     60% {
+//         transform: rotateY(180deg);
+//     }
     
-    80% {
-        transform: rotateY(0deg);
-    }
-}
+//     80% {
+//         transform: rotateY(0deg);
+//     }
+// }
 
 @keyframes load {
 	from {
@@ -708,5 +712,5 @@ figure {
 
 .bounceUp {animation: bounceUp 1s ease ;animation-fill-mode: forwards;}
 .popLogo {animation: popLogo 1s ease;animation-fill-mode: forwards;}
-.flipLogo {animation: flipLogo 4s ease infinite;}
+// .flipLogo {animation: flipLogo 4s ease infinite;}
 .shrinkImage{animation: shrinkImage var(--shrinkDuration) linear; animation-fill-mode: forwards;}
