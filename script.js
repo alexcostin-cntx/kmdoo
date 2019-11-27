@@ -24,7 +24,7 @@ const sliderUnit = {
     // activeSlide
     // previousSlide
     // nextSlide
-    slideDuration: 10000
+    slideDuration: 8000
 }
 
 //-----------------------------------------
@@ -136,10 +136,8 @@ function startReading() {
     cover.setAttribute("style", `transform: translateX(-${coverwidth}px)`); // move cover out of view
     bottomDiscovered.classList.add("hide"); // hide title and content related to cover
     setTimeout(function() { cover.classList.add('hide') }, 1000);// hide cover after it's out of view
-    
-    logo.classList = "logo avatar" // start logo flip animation
+    logo.classList = "logo" // start logo flip animation
     status.slideType = "description"; // update slider object
-    
     startSliderLoop();
 }
 
@@ -152,9 +150,8 @@ function startSliderLoop() {
     sliderFirst.setAttribute("active", ""); // show first slide of slider
     bottomSlider.classList.remove("hide"); // show bottom side of slider
     bottomSlider.firstElementChild.classList.remove("hide"); // show bottom content of slider
-
     centerImages(sliderFirst);
-    
+
     // update slider object
     sliderUnit.activeSlide = sliderFirst;
     sliderUnit.nextSlide = sliderFirst.nextElementSibling;
@@ -183,6 +180,7 @@ function loop() {
         status.slideType = nextSlide.getAttribute("data-type");
 
         getSlideTitle();// replaces slide title text with data-title from the .slide html element
+        changeSubtitle();
         // activeSlide.setAttribute("style", `transform: translateX(-${activeSlide.firstElementChild.clientWidth}px); opacity:0`);
         activeSlide.setAttribute("style", "opacity:0;");
         nextSlide.setAttribute("style", "display: initial; ");
@@ -216,7 +214,7 @@ function loop() {
             let text = content.getElementsByClassName("quote-1-wrapper")[0];
             content.classList.remove("hide");
             text.classList.add('bounceUp');
-            scrollQuoteAuthor();
+            // scrollQuoteAuthor();
             setTimeout(function() { 
                 text.classList = "quote-1-wrapper";
                 content.classList.add("hide");
@@ -240,6 +238,7 @@ function loop() {
             }
             
         }, 1000);
+        // changeSubtitle();
         
     }, sliderUnit.slideDuration);
 }
@@ -248,7 +247,12 @@ function loop() {
 function getSlideTitle() {
     let titleText = document.querySelector(`.slide[data-type="${status.slideType}"]`).getAttribute("data-title");
     let slideTitletoReplace = document.querySelector(".details .slide-title");
-    slideTitletoReplace.innerHTML = titleText;
+    
+    setTimeout(function() { 
+        slideTitletoReplace.innerHTML = titleText;
+    }, 200);
+    
+    
 }
 
 
@@ -326,23 +330,43 @@ function animationsOnLoad(){
 }
 
 // scroll quote title
-function scrollQuoteAuthor() {
-    let authorWrapper = document.querySelector(".scroll-author");
-    let author = document.querySelector(".author-1");
-    let unitwidth = unitSize()[0];
-    let scrollLength = author.offsetWidth - unitwidth + 20;
-    let scrollDuration = sliderUnit.slideDuration - 3000;
-    authorWrapper.removeAttribute("style");
+// function scrollQuoteAuthor() {
+//     let authorWrapper = document.querySelector(".scroll-author");
+//     let author = document.querySelector(".author-1");
+//     let unitwidth = unitSize()[0];
+//     let scrollLength = author.offsetWidth - unitwidth + 20;
+//     let scrollDuration = sliderUnit.slideDuration - 3000;
+//     authorWrapper.removeAttribute("style");
 
-    setTimeout(function() { 
+//     setTimeout(function() { 
         
-        authorWrapper.setAttribute(
-            "style",
-            `
-            transition: all ${scrollDuration/1000}s linear;
-            transform: translateX(-${scrollLength}px);
-            `
-        );
+//         authorWrapper.setAttribute(
+//             "style",
+//             `
+//             transition: all ${scrollDuration/1000}s linear;
+//             transform: translateX(-${scrollLength}px);
+//             `
+//         );
+//     }, 2000);
+// }
+
+function changeSubtitle() {
+    let subtitle = document.getElementsByClassName("slide-title")[0];
+    let width = subtitle.offsetWidth;
+    subtitle.classList.add("hideSubTitle");
+    setTimeout(function() { 
+        subtitle.setAttribute("style", `transform: translateX(-${width}px)`);
+    }, 300);
+    setTimeout(function() { 
+        subtitle.setAttribute("style", ``);
+    }, 600);
+    setTimeout(function() { 
+        subtitle.classList.remove("hideSubTitle");
+        subtitle.classList.add("showSubTitle");
+    }, 900);
+    setTimeout(function() { 
+
+        subtitle.className = "slide-title";
     }, 2000);
 }
 

@@ -93,6 +93,10 @@ a.control {
   animation-timing-function: linear;
 }
 
+#circle2 {
+  opacity: 0.3;
+}
+
 button.flip {
   outline: none;
   cursor: pointer;
@@ -267,15 +271,17 @@ figure {
   transition: all var(--transitionTiming);
   transform-style: preserve-3d;
   perspective: 1000px;
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
+  border-radius: 34px;
+  overflow: hidden;
   margin: 0 0 0 10px;
   background: white;
   margin-right: 2px;
 }
 .large .unit-content .content-top .top-bar figure.logo {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
 }
 .unit-content .content-top .top-bar figure.logo img {
   width: 100%;
@@ -286,15 +292,6 @@ figure {
   top: 0;
   left: 0;
 }
-.unit-content .content-top .top-bar figure.logo .back {
-  transform: rotateY(180deg);
-}
-.unit-content .content-top .top-bar figure.logo.avatar .front {
-  display: none;
-}
-.unit-content .content-top .top-bar figure.logo.avatar .back {
-  transform: rotateY(0deg);
-}
 .unit-content .content-top .top-bar .left {
   display: flex;
   flex-grow: 1;
@@ -304,14 +301,16 @@ figure {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  overflow: hidden;
 }
 .unit-content .content-top .top-bar .left .details span {
+  transition: all var(--transitionTimingShort);
   font-size: 13px;
-  background: #fff;
-  color: black;
+  background: #202020;
+  color: white;
   display: inline-block;
   line-height: 14px;
-  padding: 0 2px;
+  padding: 0 3px;
 }
 .large .unit-content .content-top .top-bar .left .details span {
   font-size: 15px;
@@ -633,6 +632,22 @@ figure {
     transform: scale(1.2);
   }
 }
+@keyframes hideSubTitle {
+  0% {
+    color: white;
+  }
+  100% {
+    color: transparent;
+  }
+}
+@keyframes showSubTitle {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: white;
+  }
+}
 @keyframes load {
   from {
     stroke-dashoffset: 88;
@@ -653,6 +668,16 @@ figure {
 
 .shrinkImage {
   animation: shrinkImage var(--shrinkDuration) linear;
+  animation-fill-mode: forwards;
+}
+
+.hideSubTitle {
+  animation: hideSubTitle 0.2s linear;
+  animation-fill-mode: forwards;
+}
+
+.showSubTitle {
+  animation: showSubTitle 0.2s linear;
   animation-fill-mode: forwards;
 }
 

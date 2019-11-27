@@ -112,10 +112,9 @@ a {
     animation-name: load;
     animation-duration: var(--loadDuration);
     animation-timing-function: linear;
-    // animation-delay: ;
-    // animation-iteration-count: infinite;
-    // animation-fill-mode: forwards;
+
 }
+#circle2{opacity: 0.3;}
 button.flip
 {
     outline: none;
@@ -290,11 +289,13 @@ figure {
                     transition: all var(--transitionTiming);
                     transform-style: preserve-3d;
                     perspective: 1000px;
-                    width: 28px;
-                    height: 28px;
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 34px;
+                    overflow: hidden;
                     .large & {
-                        width: 34px;
-                        height: 34px;
+                        width: 36px;
+                        height: 36px;
                     }
                     margin: 0 0 0 10px;
                     background: white;
@@ -308,16 +309,6 @@ figure {
                         top: 0;
                         left: 0;
                     }
-                    .back {
-                        transform: rotateY(180deg);
-                    }
-                    .front{
-                        
-                    }
-                    &.avatar{
-                        .front{display: none}
-                        .back{transform: rotateY(0deg);}
-                    }
                 }
             }
             .left {
@@ -328,13 +319,15 @@ figure {
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
+                    overflow: hidden;
                     span {
+                        transition: all var(--transitionTimingShort);
                         font-size: 13px;
-                        background: #fff;
-                        color: black;
+                        background: #202020;
+                        color: white;
                         display: inline-block;
                         line-height: 14px;
-                        padding: 0 2px;
+                        padding: 0 3px;
                         .large & {
                             font-size: 15px;
                             line-height: 17px;
@@ -685,21 +678,25 @@ figure {
 }
 
 
-// @keyframes flipLogo {
-//     0%{
-//         transform: rotateY(0deg);
-//     }
-//     20% {
-//         transform: rotateY(180deg);
-//     }
-//     60% {
-//         transform: rotateY(180deg);
-//     }
-    
-//     80% {
-//         transform: rotateY(0deg);
-//     }
-// }
+@keyframes hideSubTitle {
+    0%{
+        color: white;
+    }
+    100% {
+        color: transparent;
+    }
+}
+
+
+@keyframes showSubTitle {
+    0%{
+        color: transparent;
+    }
+    100% {
+        color: white;
+    }
+}
+
 
 @keyframes load {
 	from {
@@ -714,3 +711,5 @@ figure {
 .popLogo {animation: popLogo 1s ease;animation-fill-mode: forwards;}
 // .flipLogo {animation: flipLogo 4s ease infinite;}
 .shrinkImage{animation: shrinkImage var(--shrinkDuration) linear; animation-fill-mode: forwards;}
+.hideSubTitle{animation: hideSubTitle 0.2s linear; animation-fill-mode: forwards;}
+.showSubTitle{animation: showSubTitle 0.2s linear; animation-fill-mode: forwards;}
