@@ -272,27 +272,30 @@ function centerImages(slide){
 // bulletlist animation
 function bulletAnimation() {
     let titles = document.querySelectorAll(".content[bullet-list] ul li")
-    let bulletItemDuration = Math.round(sliderUnit.slideDuration / titles.length);
+    let bulletItemDuration = Math.round((sliderUnit.slideDuration-1000) / titles.length);
 
-    titles.forEach(function(element, i){
-        let prevElement = (element.previousElementSibling !== null) ? element.previousElementSibling : element ;
-        let itemBody = element.getElementsByClassName('item-body')[0];
-        let prevItemBody = (prevElement !== null) ? prevElement.getElementsByClassName('item-body')[0] : null;
-        let itemHeight = itemBody.scrollHeight;
-        // console.log(prevElement.getElementsByClassName('item-body')[0]);
+    setTimeout(function() { 
+        titles.forEach(function(element, i){
+            let prevElement = (element.previousElementSibling !== null) ? element.previousElementSibling : element ;
+            let itemBody = element.getElementsByClassName('item-body')[0];
+            let prevItemBody = (prevElement !== null) ? prevElement.getElementsByClassName('item-body')[0] : null;
+            let itemHeight = itemBody.scrollHeight;
+            // console.log(prevElement.getElementsByClassName('item-body')[0]);
+    
+            setTimeout(() => {
+                if(element.classList == "active") {
+                    prevItemBody.setAttribute("style", `max-height:0px`);
+                    element.classList.remove("active");
+                } else {
+                    prevElement.classList.remove("active");
+                    element.classList.add("active")
+                    prevItemBody.setAttribute("style", `max-height:0px`);
+                    itemBody.setAttribute("style", `max-height: ${itemHeight}px`);
+                }
+            }, (i * bulletItemDuration)-2);
+        }); 
+    }, 1000);
 
-        setTimeout(() => {
-            if(element.classList == "active") {
-                prevItemBody.setAttribute("style", `max-height:0px`);
-                element.classList.remove("active");
-            } else {
-                prevElement.classList.remove("active");
-                element.classList.add("active")
-                prevItemBody.setAttribute("style", `max-height:0px`);
-                itemBody.setAttribute("style", `max-height: ${itemHeight}px`);
-            }
-        }, (i * bulletItemDuration)-2);
-    });
     titles.forEach(function(element, i){
         element.className = "";
         element.getElementsByClassName('item-body')[0].setAttribute("style", `max-height:0px`);
