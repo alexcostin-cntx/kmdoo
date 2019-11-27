@@ -108,11 +108,11 @@ a {
 }
 #strokee {
     stroke-dasharray: 88;
-	stroke-dashoffset: 88;
+    stroke-dashoffset: 88;
     animation-name: load;
     animation-duration: var(--loadDuration);
     animation-timing-function: linear;
-
+    
 }
 #circle2{opacity: 0.3;}
 button.flip
@@ -246,6 +246,18 @@ figure {
             bottom: 0;
             display: none;
             &[active] {display: initial; z-index: 1;}
+            &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                background: black;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 1;
+                opacity: 0.12;
+            }
         }
     }
 }
@@ -299,7 +311,7 @@ figure {
                     }
                     margin: 0 0 0 10px;
                     background: white;
-                    margin-right: 2px;
+                    margin-right: 4px;
                     img {
                         width: 100%;
                     }
@@ -513,6 +525,7 @@ figure {
                         }
                         display: inline-block;
                         width: 26px;
+                        height: 20px;
                         position: relative;
                     }
                     .closing-quote {margin-left: 12px;}
@@ -699,12 +712,12 @@ figure {
 
 
 @keyframes load {
-	from {
-		stroke-dashoffset: 88;
-	}
-	to {
-		stroke-dashoffset: 0;
-	}
+    from {
+        stroke-dashoffset: 88;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 
 .bounceUp {animation: bounceUp 1s ease ;animation-fill-mode: forwards;}
