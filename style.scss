@@ -531,16 +531,14 @@ figure {
                     }
                     .closing-quote {margin-left: 12px;}
                 }
-                .scroll-author  {
-                    display: block;
-                    width: 1000px;
+                
+                .author-1 {
+                    font-size: 14px;
+                    font-weight: 300;
                     padding-top: 10px;
-                    .author-1 {
-                        font-size: 14px;
-                        margin-top: 4px;
-                        font-weight: 300;
-                    }
+                    display: block;
                 }
+                
             }
             
         }

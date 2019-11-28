@@ -432,16 +432,17 @@ function countDown() {
     .setProperty('--loadDuration', `${sliderUnit.slideDuration/1000}s`);
 
     setInterval(function(){
-        count.innerHTML = totalSeconds;
         totalSeconds -= 1;
+        count.innerHTML = totalSeconds;
     }, 1000)
 
     setTimeout(function() {
         let cover = document.getElementsByClassName('cover')[0];
         if (cover.classList.contains("hide")) {
             console.log("asd");
-        } else {
-            startReading();
+        } else if (totalSeconds == 0) {
+            // startReading();
+            // console.log(totalSeconds);
         }
         
     }, sliderUnit.slideDuration);

@@ -505,15 +505,11 @@ figure {
 .unit-bottom[slider] .content .quote-1-wrapper .quote-1 .closing-quote {
   margin-left: 12px;
 }
-.unit-bottom[slider] .content .quote-1-wrapper .scroll-author {
-  display: block;
-  width: 1000px;
-  padding-top: 10px;
-}
-.unit-bottom[slider] .content .quote-1-wrapper .scroll-author .author-1 {
+.unit-bottom[slider] .content .quote-1-wrapper .author-1 {
   font-size: 14px;
-  margin-top: 4px;
   font-weight: 300;
+  padding-top: 10px;
+  display: block;
 }
 #cnx-unit {
   overflow: hidden;
