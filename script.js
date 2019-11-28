@@ -393,23 +393,6 @@ function pageNormal() {
     }, 1000);
 }
 
-// function logoKeepAvatar() {
-//     let logo = document.querySelector(".logo");
-//     let btn = document.getElementById("logoflip");
-//     let spanleft = btn.getElementsByClassName("left")[0];
-//     let spanright = btn.getElementsByClassName("right")[0];
-//     // console.log(spanleft);
-//     if (logo.classList.contains("flipLogo")) {
-//         logo.classList.remove("flipLogo")
-//         spanleft.classList.remove("active");
-//         spanright.classList.add("active");
-//     } else {
-//         logo.classList.add("flipLogo");
-//         spanright.classList.remove("active");
-//         spanleft.classList.add("active");
-
-//     }
-// }
 
 function setColoronpicker() {
     let accent = getComputedStyle(document.documentElement).getPropertyValue('--accentMain');
@@ -423,13 +406,9 @@ picker.addEventListener("input", function() {
 
 
 function countDown() {
-    let stroke = document.getElementById("strokee");
+    let stroke = document.getElementsByClassName("strokee")[0];
     let count = document.getElementById("count");
     let totalSeconds = sliderUnit.slideDuration/1000 ;
-    
-
-    document.documentElement.style
-    .setProperty('--loadDuration', `${sliderUnit.slideDuration/1000}s`);
 
     setInterval(function(){
         totalSeconds -= 1;
@@ -438,11 +417,11 @@ function countDown() {
 
     setTimeout(function() {
         let cover = document.getElementsByClassName('cover')[0];
-        if (cover.classList.contains("hide")) {
-            console.log("asd");
-        } else if (totalSeconds == 0) {
-            // startReading();
-            // console.log(totalSeconds);
+        if (cover.classList.contains("hide") == true) {
+
+        } else {
+            startReading();
+            // console.log("assssssd");
         }
         
     }, sliderUnit.slideDuration);

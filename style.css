@@ -15,7 +15,7 @@
   --transitionTiming: .5s ease-in-out;
   --transitionTimingShort: .2s ease-in-out;
   --shrinkDuration: 1s;
-  --loadDuration: 2s;
+  --loadDuration: 8s;
   --pageWidth: 960px;
 }
 
@@ -74,6 +74,7 @@ a.control {
   left: 3px;
   top: 1px;
   height: 100%;
+  z-index: 10;
 }
 #cnx-unit button.main.v2 .loader #count {
   color: white;
@@ -91,6 +92,7 @@ a.control {
   animation-name: load;
   animation-duration: var(--loadDuration);
   animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 #circle2 {
