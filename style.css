@@ -68,6 +68,9 @@ a.control {
   padding-left: 44px;
   display: flex;
 }
+#cnx-unit button.main.v2 .loader .c1 {
+  opacity: 0;
+}
 #cnx-unit button.main.v2 .loader svg {
   width: 36px;
   position: absolute;
@@ -85,8 +88,10 @@ a.control {
   text-align: center;
   width: 19px;
 }
-
-#strokee {
+#cnx-unit button.main.v2 .loader.startLoad .c1 {
+  opacity: 1;
+}
+#cnx-unit button.main.v2 .loader.startLoad .c1 #strokee {
   stroke-dasharray: 88;
   stroke-dashoffset: 88;
   animation-name: load;
@@ -161,6 +166,56 @@ figure {
 .secondary p {
   margin: 0;
   font-size: 16px;
+}
+
+#cnx-unit .unit-wrapper {
+  position: relative;
+}
+#cnx-unit .unit-wrapper .overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 22;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transitionTimingShort);
+}
+#cnx-unit .unit-wrapper .overlay:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+#cnx-unit .unit-wrapper .overlay:hover button svg {
+  transform: scale(1.3);
+}
+#cnx-unit .unit-wrapper .overlay:hover button:after {
+  animation: pulse 0.8s ease-out infinite;
+}
+#cnx-unit .unit-wrapper .overlay button.round {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 42px;
+  background: #fff;
+  position: relative;
+}
+#cnx-unit .unit-wrapper .overlay button.round:after {
+  content: "";
+  position: absolute;
+  border: 2px solid white;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  transform-origin: center;
+  transform: scale(0.8);
+}
+#cnx-unit .unit-wrapper .overlay button.round svg {
+  transition: all var(--transitionTimingShort);
+  fill: var(--accentMain);
 }
 
 #unit-main {
@@ -516,6 +571,14 @@ figure {
 #cnx-unit {
   overflow: hidden;
 }
+#cnx-unit button.round {
+  width: 80px;
+  height: 80px;
+}
+#cnx-unit button.round svg {
+  width: 32px;
+  height: 32px;
+}
 #cnx-unit.large .unit-bottom[cover] .content span.title {
   font-size: 40px;
 }
@@ -539,6 +602,14 @@ figure {
 }
 #cnx-unit.large .unit-bottom[slider] .content .quote-1 {
   font-size: 26px;
+}
+#cnx-unit.medium button.round {
+  width: 68px;
+  height: 68px;
+}
+#cnx-unit.medium button.round svg {
+  width: 24px;
+  height: 24px;
 }
 #cnx-unit.medium .unit-bottom[cover] .content span.title {
   font-size: 30px;
@@ -564,6 +635,14 @@ figure {
 #cnx-unit.medium .unit-bottom[slider] .content .quote-1 {
   font-size: 20px;
 }
+#cnx-unit.small button.round {
+  width: 60px;
+  height: 60px;
+}
+#cnx-unit.small button.round svg {
+  width: 24px;
+  height: 24px;
+}
 #cnx-unit.small .unit-bottom[cover] .content span.title {
   font-size: 24px;
 }
@@ -587,6 +666,14 @@ figure {
 }
 #cnx-unit.small .unit-bottom[slider] .quote-1 {
   font-size: 16px;
+}
+#cnx-unit.xsmall button.round {
+  width: 56px;
+  height: 56px;
+}
+#cnx-unit.xsmall button.round svg {
+  width: 20px;
+  height: 20px;
 }
 #cnx-unit.xsmall .unit-bottom[cover] .content span.title {
   font-size: 22px;
@@ -666,6 +753,16 @@ figure {
   }
   to {
     stroke-dashoffset: 0;
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  60%, 100% {
+    transform: scale(1.3);
+    opacity: 0;
   }
 }
 .bounceUp {

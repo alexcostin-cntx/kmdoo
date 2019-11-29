@@ -2,6 +2,7 @@ const sizeP = document.getElementById('unit-size');
 const cnxUnit = document.getElementById('cnx-unit');
 const unitMain = document.getElementById('unit-main');
 let picker = document.getElementById("picker");
+let overlay = document.getElementsByClassName("overlay")[0];
 
 const large = 570;
 const medium = 400;
@@ -404,11 +405,24 @@ picker.addEventListener("input", function() {
     .setProperty('--accentMain', `${picker.value}`);
 }, false);
 
+function preCountDown() {
+    let count = document.getElementById("count");
+    let totalSeconds = sliderUnit.slideDuration/1000 ;
+    count.innerHTML = totalSeconds;
+}
+
+overlay.addEventListener("click",function(){
+    this.classList.add('hide');
+    countDown();
+});
 
 function countDown() {
     let stroke = document.getElementsByClassName("strokee")[0];
     let count = document.getElementById("count");
     let totalSeconds = sliderUnit.slideDuration/1000 ;
+    let loader = document.getElementsByClassName("loader")[0];
+
+    loader.classList.add("startLoad");
 
     setInterval(function(){
         totalSeconds -= 1;
@@ -438,7 +452,7 @@ function triggerOnResize() {
 function triggerOnLoad() {
    animationsOnLoad();
    setColoronpicker();
-   countDown();
+    preCountDown();
 }
 
 //---------------------------------------------
