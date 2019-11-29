@@ -169,6 +169,11 @@ function loop() {
     let text = content.getElementsByClassName("description-1-wrapper")[0];
     content.classList.remove("hide");
     text.classList.add('bounceUp');
+    let currentIndicator = document.querySelector("span[data-type='description'] figure");
+
+    currentIndicator.setAttribute("style", "transform: scaleX(1)");
+
+
     setTimeout(function() { 
         text.classList = "description-1-wrapper";
         content.classList.add("hide");
@@ -179,20 +184,20 @@ function loop() {
         let previousSlide = (activeSlide.previousElementSibling !==null) ? activeSlide.previousElementSibling : null;
         let nextSlide = (activeSlide.nextElementSibling !==null) ? activeSlide.nextElementSibling : document.querySelector(".slider").firstElementChild ;
         status.slideType = nextSlide.getAttribute("data-type");
+        
 
         getSlideTitle();// replaces slide title text with data-title from the .slide html element
         changeSubtitle();
-        // activeSlide.setAttribute("style", `transform: translateX(-${activeSlide.firstElementChild.clientWidth}px); opacity:0`);
         activeSlide.setAttribute("style", "opacity:0;");
         nextSlide.setAttribute("style", "display: initial; ");
         centerImages(nextSlide);
-
-        
 
         // animate bottom content
         if (status.slideType === "description") {
             let content = document.querySelector(".content[description]");
             let text = content.getElementsByClassName("description-1-wrapper")[0];
+            let currentIndicator = document.querySelector("span[data-type='description'] figure");
+            currentIndicator.setAttribute("style", "transform: scaleX(1)");
             content.classList.remove("hide");
             text.classList.add('bounceUp');
             setTimeout(function() { 
@@ -203,8 +208,10 @@ function loop() {
         } else if (status.slideType === "bullet-list") {
             let content = document.querySelector(".content[bullet-list]");
             let text = content.getElementsByClassName("bullet-1-wrapper")[0];
+            let currentIndicator = document.querySelector("span[data-type='bullet-list'] figure");
+            currentIndicator.setAttribute("style", "transform: scaleX(1)");
             content.classList.remove("hide");
-            text.classList.add('bounceUp');
+            text.classList.add('bounceUp'); 
             bulletAnimation()
             setTimeout(function() { 
                 text.classList = "bullet-1-wrapper";
@@ -213,13 +220,20 @@ function loop() {
         } else if (status.slideType === "quote") {
             let content = document.querySelector(".content[quote]");
             let text = content.getElementsByClassName("quote-1-wrapper")[0];
+            let currentIndicator = document.querySelector("span[data-type='quote'] figure");
+            currentIndicator.setAttribute("style", "transform: scaleX(1)");
+            
             content.classList.remove("hide");
             text.classList.add('bounceUp');
-            // scrollQuoteAuthor();
             setTimeout(function() { 
                 text.classList = "quote-1-wrapper";
                 content.classList.add("hide");
             }, sliderUnit.slideDuration);
+
+            
+            setTimeout(function() { 
+                replaceSlideIndicators();
+            }, sliderUnit.slideDuration-10);
         }
 
         setTimeout(function() { 
@@ -239,11 +253,23 @@ function loop() {
             }
             
         }, 1000);
-        // changeSubtitle();
         
     }, sliderUnit.slideDuration);
 }
 
+function replaceSlideIndicators(){
+    let indicators = document.querySelectorAll(".stepper span")
+    indicators.forEach(element => {
+        if (element.getAttribute("data-type") !== "cover") {
+            let figure = element.firstElementChild;
+            element.removeChild(figure);
+            let newfigure = document.createElement("figure");
+            element.appendChild(newfigure);
+        } else {
+
+        }
+    });
+}
 
 function getSlideTitle() {
     let titleText = document.querySelector(`.slide[data-type="${status.slideType}"]`).getAttribute("data-title");
@@ -253,9 +279,7 @@ function getSlideTitle() {
         slideTitletoReplace.innerHTML = titleText;
     }, 200);
     
-    
 }
-
 
 function centerImages(slide){
     let image = slide.querySelector("img");
@@ -333,26 +357,6 @@ function animationsOnLoad(){
     
 }
 
-// scroll quote title
-// function scrollQuoteAuthor() {
-//     let authorWrapper = document.querySelector(".scroll-author");
-//     let author = document.querySelector(".author-1");
-//     let unitwidth = unitSize()[0];
-//     let scrollLength = author.offsetWidth - unitwidth + 20;
-//     let scrollDuration = sliderUnit.slideDuration - 3000;
-//     authorWrapper.removeAttribute("style");
-
-//     setTimeout(function() { 
-        
-//         authorWrapper.setAttribute(
-//             "style",
-//             `
-//             transition: all ${scrollDuration/1000}s linear;
-//             transform: translateX(-${scrollLength}px);
-//             `
-//         );
-//     }, 2000);
-// }
 
 function changeSubtitle() {
     let subtitle = document.getElementsByClassName("slide-title")[0];
@@ -377,6 +381,7 @@ function changeSubtitle() {
 
 //----------------aux functions---------------
 //---------------------------------------------
+
 
 function pageBig() {
     document.documentElement.style
@@ -421,6 +426,9 @@ function countDown() {
     let count = document.getElementById("count");
     let totalSeconds = sliderUnit.slideDuration/1000 ;
     let loader = document.getElementsByClassName("loader")[0];
+    let currentIndicator = document.querySelector("span[data-type='cover'] figure");
+
+    currentIndicator.setAttribute("style", "transform: scaleX(1)");
 
     loader.classList.add("startLoad");
 
@@ -435,7 +443,6 @@ function countDown() {
 
         } else {
             startReading();
-            // console.log("assssssd");
         }
         
     }, sliderUnit.slideDuration);
