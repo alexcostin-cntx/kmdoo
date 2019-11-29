@@ -179,7 +179,7 @@ function loop() {
         content.classList.add("hide");
     }, sliderUnit.slideDuration);
     
-    setInterval(function(){ 
+    let interval = setInterval(function(){ 
         let activeSlide = document.querySelector(".slide[active]");
         let previousSlide = (activeSlide.previousElementSibling !==null) ? activeSlide.previousElementSibling : null;
         let nextSlide = (activeSlide.nextElementSibling !==null) ? activeSlide.nextElementSibling : document.querySelector(".slider").firstElementChild ;
@@ -233,7 +233,8 @@ function loop() {
             
             setTimeout(function() { 
                 replaceSlideIndicators();
-            }, sliderUnit.slideDuration-10);
+                // clearInterval(interval);
+            }, sliderUnit.slideDuration-3);
         }
 
         setTimeout(function() { 
@@ -254,9 +255,12 @@ function loop() {
             
         }, 1000);
         
-    }, sliderUnit.slideDuration);
+    }, sliderUnit.slideDuration); 
 }
 
+function resetEverything(){
+    console.log("reset everything");
+}
 function replaceSlideIndicators(){
     let indicators = document.querySelectorAll(".stepper span")
     indicators.forEach(element => {
@@ -419,6 +423,7 @@ function preCountDown() {
 overlay.addEventListener("click",function(){
     this.classList.add('hide');
     countDown();
+    console.log(sliderUnit.activeSlide);
 });
 
 function countDown() {

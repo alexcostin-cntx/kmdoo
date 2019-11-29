@@ -175,7 +175,7 @@ figure {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 0;
   left: 0;
@@ -187,13 +187,13 @@ figure {
   transition: all var(--transitionTimingShort);
 }
 #cnx-unit .unit-wrapper .overlay:hover {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
 }
 #cnx-unit .unit-wrapper .overlay:hover button svg {
   transform: scale(1.3);
 }
 #cnx-unit .unit-wrapper .overlay:hover button:after {
-  animation: pulse 0.8s ease-out infinite;
+  animation: pulse 1s ease-out infinite;
 }
 #cnx-unit .unit-wrapper .overlay button.round {
   display: flex;
@@ -770,7 +770,7 @@ figure {
     opacity: 0.8;
   }
   60%, 100% {
-    transform: scale(1.3);
+    transform: scale(1.4);
     opacity: 0;
   }
 }
