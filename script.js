@@ -133,7 +133,7 @@ function startReading() {
     let logo = document.querySelector(".logo");
     let details = document.querySelector("#cnx-unit .details");
     
-    document.querySelector("span[data-type='cover']").setAttribute("style", "background: var(--accentMain)");
+    document.querySelector("span[data-type='cover']").setAttribute("style", "background: var(--accentSlider)");
     
     details.classList.remove("hide"); // details next to logo
     cover.setAttribute("style", `transform: translateX(-${coverwidth}px)`); // move cover out of view
