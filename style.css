@@ -332,7 +332,7 @@ figure {
   transform-origin: left;
   transition: all var(--loadDuration) linear;
   transform: scaleX(0);
-  background: var(--accentMain);
+  background: white;
 }
 .unit-content .content-top .top-bar {
   margin-top: var(--playerSmallPadding);
