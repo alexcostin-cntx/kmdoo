@@ -133,6 +133,8 @@ function startReading() {
     let logo = document.querySelector(".logo");
     let details = document.querySelector("#cnx-unit .details");
     
+    document.querySelector("span[data-type='cover']").setAttribute("style", "background: var(--accentMain)");
+    
     details.classList.remove("hide"); // details next to logo
     cover.setAttribute("style", `transform: translateX(-${coverwidth}px)`); // move cover out of view
     bottomDiscovered.classList.add("hide"); // hide title and content related to cover
@@ -183,12 +185,13 @@ function loop() {
         let activeSlide = document.querySelector(".slide[active]");
         let previousSlide = (activeSlide.previousElementSibling !==null) ? activeSlide.previousElementSibling : null;
         let nextSlide = (activeSlide.nextElementSibling !==null) ? activeSlide.nextElementSibling : document.querySelector(".slider").firstElementChild ;
+        let slideWidth = activeSlide.clientWidth;
         status.slideType = nextSlide.getAttribute("data-type");
         
 
         getSlideTitle();// replaces slide title text with data-title from the .slide html element
         changeSubtitle();
-        activeSlide.setAttribute("style", "opacity:0;");
+        activeSlide.setAttribute("style", `transform: translateX(-${slideWidth+70}px)`);
         nextSlide.setAttribute("style", "display: initial; ");
         centerImages(nextSlide);
 
@@ -423,7 +426,7 @@ function preCountDown() {
 overlay.addEventListener("click",function(){
     this.classList.add('hide');
     countDown();
-    console.log(sliderUnit.activeSlide);
+    // console.log(sliderUnit.activeSlide);
 });
 
 function countDown() {
